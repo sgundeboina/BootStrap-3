@@ -1,0 +1,12 @@
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m6-animation\demos\AnimatedElements\AnimatedElements\bin\AnimatedElements.dll.config
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m6-animation\demos\AnimatedElements\AnimatedElements\bin\AnimatedElements.dll
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m6-animation\demos\AnimatedElements\AnimatedElements\bin\AnimatedElements.pdb
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m6-animation\demos\AnimatedElements\AnimatedElements\obj\Debug\AnimatedElements.csprojResolveAssemblyReference.cache
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m6-animation\demos\AnimatedElements\AnimatedElements\obj\Debug\AnimatedElements.dll
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m6-animation\demos\AnimatedElements\AnimatedElements\obj\Debug\AnimatedElements.pdb
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\6-responsive-websites-bootstrap3-m6-animation-exercise-files\demos\AnimatedElements\AnimatedElements\bin\AnimatedElements.dll.config
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\6-responsive-websites-bootstrap3-m6-animation-exercise-files\demos\AnimatedElements\AnimatedElements\bin\AnimatedElements.dll
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\6-responsive-websites-bootstrap3-m6-animation-exercise-files\demos\AnimatedElements\AnimatedElements\bin\AnimatedElements.pdb
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\6-responsive-websites-bootstrap3-m6-animation-exercise-files\demos\AnimatedElements\AnimatedElements\obj\Debug\AnimatedElements.csprojResolveAssemblyReference.cache
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\6-responsive-websites-bootstrap3-m6-animation-exercise-files\demos\AnimatedElements\AnimatedElements\obj\Debug\AnimatedElements.dll
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\6-responsive-websites-bootstrap3-m6-animation-exercise-files\demos\AnimatedElements\AnimatedElements\obj\Debug\AnimatedElements.pdb

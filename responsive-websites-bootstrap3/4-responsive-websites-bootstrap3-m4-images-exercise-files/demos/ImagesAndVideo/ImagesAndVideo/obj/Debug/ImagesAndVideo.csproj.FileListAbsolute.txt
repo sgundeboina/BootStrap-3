@@ -1,0 +1,12 @@
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m4-images\demos\ImagesAndVideo\ImagesAndVideo\bin\ImagesAndVideo.dll.config
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m4-images\demos\ImagesAndVideo\ImagesAndVideo\bin\ImagesAndVideo.dll
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m4-images\demos\ImagesAndVideo\ImagesAndVideo\bin\ImagesAndVideo.pdb
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m4-images\demos\ImagesAndVideo\ImagesAndVideo\obj\Debug\ImagesAndVideo.csprojResolveAssemblyReference.cache
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m4-images\demos\ImagesAndVideo\ImagesAndVideo\obj\Debug\ImagesAndVideo.dll
+C:\Users\Mark Zamoyta\dev\Pluralsight\responsive-websites-bootstrap3\responsive-websites-bootstrap3-m4-images\demos\ImagesAndVideo\ImagesAndVideo\obj\Debug\ImagesAndVideo.pdb
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\4-responsive-websites-bootstrap3-m4-images-exercise-files\demos\ImagesAndVideo\ImagesAndVideo\bin\ImagesAndVideo.dll.config
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\4-responsive-websites-bootstrap3-m4-images-exercise-files\demos\ImagesAndVideo\ImagesAndVideo\bin\ImagesAndVideo.dll
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\4-responsive-websites-bootstrap3-m4-images-exercise-files\demos\ImagesAndVideo\ImagesAndVideo\bin\ImagesAndVideo.pdb
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\4-responsive-websites-bootstrap3-m4-images-exercise-files\demos\ImagesAndVideo\ImagesAndVideo\obj\Debug\ImagesAndVideo.csprojResolveAssemblyReference.cache
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\4-responsive-websites-bootstrap3-m4-images-exercise-files\demos\ImagesAndVideo\ImagesAndVideo\obj\Debug\ImagesAndVideo.dll
+C:\Experiments\Pluralsight\responsive-websites-bootstrap3\4-responsive-websites-bootstrap3-m4-images-exercise-files\demos\ImagesAndVideo\ImagesAndVideo\obj\Debug\ImagesAndVideo.pdb
