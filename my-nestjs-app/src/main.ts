@@ -1,6 +1,12 @@
+
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { loadEnvConfig } from './configuration';
+
+// Determine environment (default to 'dev' if not set)
+const NODE_ENV = process.env.NODE_ENV || process.env.npm_lifecycle_event?.split(':')[1] || 'dev';
+loadEnvConfig(NODE_ENV);
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
