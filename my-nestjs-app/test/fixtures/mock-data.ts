@@ -1,24 +1,31 @@
-import type { StatusResponse } from '../../src/types';
 
-export const mockStatusResponse: StatusResponse = {
-  status: 'OK',
+import type { HealthStatusResponse } from "../../src/modules/app/types/health-status.response";
+
+export const mockStatusResponse: HealthStatusResponse = {
+  status: "OK",
   statusCode: 200,
+  environment: "test-env",
+  dbHost: "test-db-host",
 };
 
-export const mockStatusResponseError: StatusResponse = {
-  status: 'ERROR',
+export const mockStatusResponseError: HealthStatusResponse = {
+  status: "ERROR",
   statusCode: 500,
+  environment: "test-env",
+  dbHost: "test-db-host",
 };
 
-export const mockStatusResponseNotFound: StatusResponse = {
-  status: 'NOT_FOUND',
+export const mockStatusResponseNotFound: HealthStatusResponse = {
+  status: "NOT_FOUND",
   statusCode: 404,
+  environment: "test-env",
+  dbHost: "test-db-host",
 };
 
 // API endpoints for testing
 export const API_ENDPOINTS = {
-  status: '/',
-  swagger: '/swagger',
+  status: "/",
+  swagger: "/swagger",
 } as const;
 
 // HTTP status codes

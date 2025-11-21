@@ -1,12 +1,28 @@
 
+
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
-import { loadEnvConfig } from './configuration';
+import { AppModule } from './modules/app/app.module';
+import { ConfigModule } from '@nestjs/config';
+import { config as loadEnv } from 'dotenv';
+import { join } from 'path';
 
-// Determine environment (default to 'dev' if not set)
-const NODE_ENV = process.env.NODE_ENV || process.env.npm_lifecycle_event?.split(':')[1] || 'dev';
-loadEnvConfig(NODE_ENV);
+// Set NODE_ENV and load the correct .env file
+let nodeEnv = process.env.NODE_ENV;
+if (!nodeEnv || nodeEnv === '') {
+  nodeEnv = 'dev';
+  process.env.NODE_ENV = 'dev';
+}
+
+let envFilePath = '';
+if (nodeEnv === 'dev') {
+  envFilePath = join(__dirname, '..', 'config', '.env.dev');
+} else if (nodeEnv === "qa") {
+  envFilePath = join(__dirname, "..", "config", ".env.qa");
+} else {
+  envFilePath = join(__dirname, '..', 'config', `.env.${nodeEnv}`);
+}
+loadEnv({ path: envFilePath });
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
