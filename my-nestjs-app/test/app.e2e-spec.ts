@@ -1,3 +1,12 @@
+function createMockConfigService() {
+  return {
+    get: jest.fn((key: string) => {
+      if (key === "NODE_ENV") return "test";
+      if (key === "DB_HOST") return "test-db-host";
+      return undefined;
+    }),
+  };
+}
 import { Test, TestingModule } from "@nestjs/testing";
 import { INestApplication } from "@nestjs/common";
 import request from "supertest";
@@ -15,13 +24,7 @@ describe("AppController (e2e)", () => {
       providers: [
         {
           provide: ConfigService,
-          useValue: {
-            get: jest.fn((key: string) => {
-              if (key === "NODE_ENV") return "test";
-              if (key === "DB_HOST") return "test-db-host";
-              return undefined;
-            }),
-          },
+          useValue: createMockConfigService(),
         },
       ],
     }).compile();
@@ -36,31 +39,23 @@ describe("AppController (e2e)", () => {
 
   describe("GET /", () => {
     it("should return status response", () => {
+      const expected = { ...mockStatusResponse, environment: "dev", dbHost: "localhost" };
       return request(app.getHttpServer())
         .get(API_ENDPOINTS.status)
         .expect(HTTP_STATUS.OK)
         .expect((res) => {
-          expect(res.body).toMatchObject({
-            status: "OK",
-            statusCode: 200,
-            environment: "dev",
-            dbHost: "localhost",
-          });
+          expect(res.body).toMatchObject(expected);
         });
     });
 
     it("should return proper content-type", () => {
+      const expected = { ...mockStatusResponse, environment: "dev", dbHost: "localhost" };
       return request(app.getHttpServer())
         .get(API_ENDPOINTS.status)
         .expect(HTTP_STATUS.OK)
         .expect("Content-Type", /json/)
         .expect((res) => {
-          expect(res.body).toMatchObject({
-            status: "OK",
-            statusCode: 200,
-            environment: "dev",
-            dbHost: "localhost",
-          });
+          expect(res.body).toMatchObject(expected);
         });
     });
 
@@ -72,8 +67,9 @@ describe("AppController (e2e)", () => {
           const body = res.body as Record<string, unknown>;
           expect(body).toHaveProperty("status");
           expect(body).toHaveProperty("statusCode");
-          expect(typeof body.status).toBe("string");
-          expect(typeof body.statusCode).toBe("number");
+          expect(body).toHaveProperty("environment");
+          expect(body).toHaveProperty("dbHost");
+
         });
     });
   });
