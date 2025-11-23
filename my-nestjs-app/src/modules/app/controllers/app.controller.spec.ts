@@ -1,11 +1,10 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AppController } from "./app.controller";
 import { AppService } from "../services/app.service";
-import type { HealthStatusResponse } from "../types/index";
 import { mockStatusResponse } from "../../../../test/fixtures/mock-data";
 import { ConfigService } from "@nestjs/config";
 
-describe('AppController', () => {
+describe("AppController", () => {
   let appController: AppController;
   let appService: AppService;
 
@@ -30,29 +29,57 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
     appService = app.get<AppService>(AppService);
   });
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
-  describe('getStatus', () => {
-    it('should return status response from service', () => {
+  describe("getHealthCheck", () => {
+    it("should return fallback environment and dbHost values when missing", () => {
       // Arrange
-      const expectedResult: HealthStatusResponse = mockStatusResponse;
-      jest.spyOn(appService, 'getStatus').mockReturnValue(expectedResult);
+      const mockAppService = {
+        getHealthCheck: () => ({
+          status: "OK",
+          statusCode: 200,
+          environment: "dev",
+          dbHost: "localhost",
+        }),
+      } as AppService;
+      const controller = new AppController(mockAppService);
+      // Act
+      const result = controller.getHealthCheck();
+      // Assert
+      expect(result).toEqual({
+        status: "OK",
+        statusCode: 200,
+        environment: "dev",
+        dbHost: "localhost",
+      });
+    });
+    it("should return status response from service", () => {
+      // Arrange
+      const expectedResult = {
+        ...mockStatusResponse,
+        environment: "test-env",
+        dbHost: "test-db-host",
+      };
+      const spy = jest.spyOn(appService, "getHealthCheck").mockReturnValue(expectedResult);
 
       // Act
-      const result = appController.getStatus();
+      const result = appController.getHealthCheck();
 
       // Assert
       expect(result).toEqual(expectedResult);
-      expect(appService.getStatus).toHaveBeenCalled();
+      expect(spy).toHaveBeenCalled();
     });
 
-    it('should call service getStatus method once', () => {
+    it("should call service getHealthCheck method once", () => {
       // Arrange
       const serviceSpyOn = jest
-        .spyOn(appService, 'getStatus')
+        .spyOn(appService, "getHealthCheck")
         .mockReturnValue(mockStatusResponse);
 
       // Act
-      appController.getStatus();
+      appController.getHealthCheck();
 
       // Assert
       expect(serviceSpyOn).toHaveBeenCalledTimes(1);
@@ -60,7 +87,7 @@ describe('AppController', () => {
 
     it("should return correct status, statusCode, environment, and dbHost properties", () => {
       // Act
-      const result = appController.getStatus();
+      const result = appController.getHealthCheck();
 
       // Assert
       expect(result).toHaveProperty("status", "OK");

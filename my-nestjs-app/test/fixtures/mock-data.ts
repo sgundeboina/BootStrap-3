@@ -1,4 +1,3 @@
-
 import type { HealthStatusResponse } from "../../src/modules/app/types/health-status.response";
 
 export const mockStatusResponse: HealthStatusResponse = {

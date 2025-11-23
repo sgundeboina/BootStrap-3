@@ -1,25 +1,27 @@
+import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { AppController } from "./controllers/app.controller";
+import { AppService } from "./services/app.service";
+import * as path from "path";
 
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { AppController } from './controllers/app.controller';
-import { AppService } from './services/app.service';
-import { join } from 'path';
-
-let nodeEnv = process.env.NODE_ENV || 'dev';
-let envFilePath = '';
-if (nodeEnv === 'dev') {
-  envFilePath = join(__dirname, '..', 'config', '.env.dev');
-} else if (nodeEnv === "qa") {
-  envFilePath = join(__dirname, "..", "config", ".env.qa");
-} else {
-  envFilePath = join(__dirname, '..', 'config', `.env.${nodeEnv}`);
+export function getEnvFilePath(): string {
+  const nodeEnv = process.env.NODE_ENV || "dev";
+  const root = process.cwd();
+  switch (nodeEnv) {
+    case "dev":
+      return path.join(root, "config", ".env.dev");
+    case "qa":
+      return path.join(root, "config", ".env.qa");
+    default:
+      return path.join(root, "config", `.env.${nodeEnv}`);
+  }
 }
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath,
       isGlobal: true,
+      envFilePath: getEnvFilePath(),
     }),
   ],
   controllers: [AppController],

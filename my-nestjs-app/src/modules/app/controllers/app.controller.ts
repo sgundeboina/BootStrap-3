@@ -1,33 +1,33 @@
-import { Controller, Get } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AppService } from '../services/app.service';
-import type { HealthStatusResponse } from '../types/index';
+import { Controller, Get } from "@nestjs/common";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { AppService } from "../services/app.service";
+import type { HealthStatusResponse } from "../types/index";
 
-@ApiTags('app')
+@ApiTags("app")
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get status message' })
+  @ApiOperation({ summary: "Get status message" })
   @ApiResponse({
     status: 200,
-    description: 'Returns a status message',
+    description: "Returns a status message",
     schema: {
-      type: 'object',
+      type: "object",
       properties: {
         status: {
-          type: 'string',
-          example: 'OK',
+          type: "string",
+          example: "OK",
         },
         statusCode: {
-          type: 'number',
+          type: "number",
           example: 200,
         },
       },
     },
   })
-  getStatus(): HealthStatusResponse {
-    return this.appService.getStatus();
+  getHealthCheck(): HealthStatusResponse {
+    return this.appService.getHealthCheck();
   }
 }

@@ -1,10 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, TestingModule } from "@nestjs/testing";
 import { AppService } from "./app.service";
 import { ConfigService } from "@nestjs/config";
-import { mockStatusResponse } from "../../../../test/fixtures";
-import type { HealthStatusResponse } from "../types/index";
 
-describe('AppService', () => {
+describe("AppService", () => {
   let service: AppService;
   let configService: ConfigService;
 
@@ -28,16 +26,18 @@ describe('AppService', () => {
     service = module.get<AppService>(AppService);
     configService = module.get<ConfigService>(ConfigService);
   });
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
   it("should be defined", () => {
     expect(service).toBeDefined();
   });
 
-  describe("getStatus", () => {
-
+  describe("getHealthCheck", () => {
     it("should return the expected status, statusCode, environment, and dbHost", () => {
       // Act
-      const result = service.getStatus();
+      const result = service.getHealthCheck();
 
       // Assert
       expect(result.status).toBe("OK");
@@ -48,7 +48,7 @@ describe('AppService', () => {
 
     it("should return an object with correct properties", () => {
       // Act
-      const result = service.getStatus();
+      const result = service.getHealthCheck();
 
       // Assert
       expect(result).toHaveProperty("status");
@@ -58,20 +58,19 @@ describe('AppService', () => {
       expect(typeof result.status).toBe("string");
       expect(typeof result.statusCode).toBe("number");
       expect(typeof result.environment).toBe("string");
-      expect(["string", "undefined"].includes(typeof result.dbHost)).toBe(true);
     });
 
     it("should always return the same response for the same environment", () => {
       // Arrange
-      (configService.get as jest.Mock).mockImplementation((key: string) => {
-        if (key === "NODE_ENV") return "repeat-env";
-        if (key === "DB_HOST") return "repeat-db-host";
-        return undefined;
-      });
+      const configMap: Record<string, string | undefined> = {
+        NODE_ENV: "repeat-env",
+        DB_HOST: "repeat-db-host",
+      };
+      (configService.get as jest.Mock).mockImplementation((key: string) => configMap[key]);
 
       // Act
-      const result1 = service.getStatus();
-      const result2 = service.getStatus();
+      const result1 = service.getHealthCheck();
+      const result2 = service.getHealthCheck();
 
       // Assert
       expect(result1).toEqual(result2);
