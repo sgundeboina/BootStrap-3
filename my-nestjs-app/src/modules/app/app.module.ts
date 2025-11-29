@@ -3,6 +3,8 @@ import { ConfigModule } from "@nestjs/config";
 import { AppController } from "./controllers/app.controller";
 import { AppService } from "./services/app.service";
 import * as path from "path";
+import { HttpModule } from "@nestjs/axios";
+import { ManifestRepository } from "./repositories/manifest.repository";
 
 export function getEnvFilePath(): string {
   const nodeEnv = process.env.NODE_ENV || "dev";
@@ -23,8 +25,9 @@ export function getEnvFilePath(): string {
       isGlobal: true,
       envFilePath: getEnvFilePath(),
     }),
+    HttpModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ManifestRepository],
 })
 export class AppModule {}

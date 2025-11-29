@@ -1,10 +1,12 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AppService } from "./app.service";
 import { ConfigService } from "@nestjs/config";
+import { ManifestRepository } from "../repositories/manifest.repository";
 
 describe("AppService", () => {
   let service: AppService;
   let configService: ConfigService;
+  let manifestRepository: any;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -20,11 +22,20 @@ describe("AppService", () => {
             }),
           },
         },
+        {
+          provide: ManifestRepository,
+          useValue: {
+            getManifest: jest.fn(),
+            postManifest: jest.fn(),
+            patchManifest: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
     service = module.get<AppService>(AppService);
     configService = module.get<ConfigService>(ConfigService);
+    manifestRepository = module.get<ManifestRepository>(ManifestRepository);
   });
   afterEach(() => {
     jest.restoreAllMocks();
@@ -77,5 +88,31 @@ describe("AppService", () => {
       expect(result1.environment).toBe("repeat-env");
       expect(result1.dbHost).toBe("repeat-db-host");
     });
+  });
+
+  it("should call getManifest and return data", async () => {
+    const mockData = { foo: "bar" };
+    (manifestRepository.getManifest as jest.Mock).mockResolvedValue({ data: mockData });
+    const result = await service.getManifest();
+    expect(result).toEqual(mockData);
+    expect(manifestRepository.getManifest).toHaveBeenCalled();
+  });
+
+  it("should call postManifest with payload and return data", async () => {
+    const payload = { environment: "sqa", client: "xs" };
+    const mockData = { foo: "baz" };
+    (manifestRepository.postManifest as jest.Mock).mockResolvedValue({ data: mockData });
+    const result = await service.postManifest(payload);
+    expect(result).toEqual(mockData);
+    expect(manifestRepository.postManifest).toHaveBeenCalledWith(payload);
+  });
+
+  it("should call patchManifest with payload and return data", async () => {
+    const payload = { environment: "sqa", client: "xs" };
+    const mockData = { foo: "patched" };
+    (manifestRepository.patchManifest as jest.Mock).mockResolvedValue({ data: mockData });
+    const result = await service.patchManifest(payload);
+    expect(result).toEqual(mockData);
+    expect(manifestRepository.patchManifest).toHaveBeenCalledWith(payload);
   });
 });

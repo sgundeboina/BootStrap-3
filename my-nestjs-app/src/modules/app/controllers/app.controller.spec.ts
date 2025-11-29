@@ -23,6 +23,14 @@ describe("AppController", () => {
             }),
           },
         },
+        {
+          provide: require("../repositories/manifest.repository").ManifestRepository,
+          useValue: {
+            getManifest: jest.fn(),
+            postManifest: jest.fn(),
+            patchManifest: jest.fn(),
+          },
+        },
       ],
     }).compile();
 
